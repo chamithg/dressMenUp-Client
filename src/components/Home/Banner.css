@@ -1,0 +1,28 @@
+.banner-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-left,
+.banner-right {
+  width: 50vw;
+  height: 30rem;
+}
+.banner-left {
+  background-color: rgb(40, 39, 39);
+  color: aliceblue;
+  text-align: center;
+  padding: 10rem 2rem;
+}
+.btn {
+  color: red;
+  transition: all 0.4s ease-in-out;
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+.banner-image {
+  width: 50vw;
+  height: 30rem;
+}

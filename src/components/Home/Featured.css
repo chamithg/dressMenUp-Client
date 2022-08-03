@@ -1,0 +1,12 @@
+.featured-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.featured-card {
+  background-color: rgb(76, 74, 72);
+  height: 50vh;
+  border-radius: 1rem;
+}

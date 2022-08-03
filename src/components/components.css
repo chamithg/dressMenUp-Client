@@ -1,0 +1,9 @@
+.filter,
+.preview {
+  width: 20vw;
+  height: 80vh;
+}
+
+.main-container {
+  width: 100vw;
+}

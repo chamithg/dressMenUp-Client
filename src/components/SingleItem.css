@@ -1,0 +1,26 @@
+.item-main,
+.purchase-count-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.purchase-count-container {
+  width: 100px;
+}
+
+.arrow-btn {
+  font-size: 40px;
+  margin: 10px;
+  margin-top: 250px;
+}
+.arrow-btn:hover {
+  color: cadetblue;
+}
+img {
+  height: 500px;
+  object-fit: cover;
+}
+.product-detail-container {
+  text-align: left;
+}

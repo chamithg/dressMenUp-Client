@@ -1,0 +1,25 @@
+ul {
+  list-style: none;
+}
+
+li {
+  display: inline-block;
+  margin: 1rem;
+}
+.nav-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-main {
+  height: 8rem;
+}
+.cart-login {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
