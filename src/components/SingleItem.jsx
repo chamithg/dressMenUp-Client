@@ -5,20 +5,40 @@ import {
   FaMinus,
   FaPlus,
 } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../Context";
 import "./SingleItem.css";
 
 export default function SingleItem() {
-  const { fetchOne, item } = useGlobalContext();
+  const { fetchOne, item, loggedUser, getLoggedUser, addToCart } =
+    useGlobalContext();
   const [switchImage, setSwitchImage] = useState(false);
   const [purchaseCount, setPurchaseCount] = useState(1);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchOne(id);
   }, [switchImage]);
+
+  useEffect(() => {
+    fetchOne(id);
+    getLoggedUser(id, navigate);
+    console.log(loggedUser, item);
+  }, []);
+
+  const addItemToCart = () => {
+    const cartItem = {
+      user: loggedUser._id,
+      item: item,
+      quantity: purchaseCount,
+    };
+
+    console.log(cartItem);
+
+    addToCart(cartItem, navigate);
+  };
 
   return (
     <div className="item-main">
@@ -79,7 +99,9 @@ export default function SingleItem() {
             />
           </div>
 
-          <button className="btn btn-warning  btn-lg ">
+          <button
+            className="btn btn-warning  btn-lg "
+            onClick={() => addItemToCart()}>
             <h4>Add to cart</h4>
           </button>
         </div>

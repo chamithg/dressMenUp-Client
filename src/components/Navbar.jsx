@@ -2,8 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { FaShoppingCart, FaUserAlt } from "react-icons/fa";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const logout = () => {
+    axios
+      .get("http://localhost:8000/api/users/logout", { withCredentials: true })
+      .then((res) => {
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log("Error of loging out", err);
+      });
+  };
   return (
     <div className="nav-main">
       <div className="logo">
@@ -38,7 +51,9 @@ export default function Navbar() {
       </ul>
       <div className="cart-login">
         <FaShoppingCart />
-        <FaUserAlt />
+        <div onClick={() => logout()}>
+          <FaUserAlt />
+        </div>
       </div>
     </div>
   );

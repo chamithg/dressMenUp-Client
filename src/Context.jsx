@@ -8,6 +8,7 @@ const Wrapper = ({ children }) => {
   const [items, setItems] = useState([]);
   const [formError, setFormError] = useState({});
   const [triggerFetch, setTriggerFetch] = useState(false);
+  const [loggedUser, setLoggedUser] = useState({});
 
   // ! get fetch
 
@@ -87,16 +88,66 @@ const Wrapper = ({ children }) => {
       });
   };
 
+  //#all of below is user api calls
+
+  //! get logged user
+
+  const getLoggedUser = (navigate) => {
+    axios
+      .get("http://localhost:8000/api/users/getloggedinuser", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log("res when getting logged in user", res);
+
+        //! this means user is logged in and can access the page
+        if (res.data.results) {
+          setLoggedUser(res.data.results);
+        } else {
+          //! this means user is not logged in and cant access the page/ will be redirected
+          navigate("/login");
+        }
+      })
+      .catch((err) => {
+        console.log("error when getting logged in user", err);
+      });
+  };
+
+  //#all of below is cart api calls
+
+  //!add to cart
+
+  const addToCart = (cartItem, navigate) => {
+    axios
+      .post("http://localhost:8000/api/cart/items/add", cartItem)
+      .then((response) => {
+        console.log("response after adding to cart", response);
+        if (response.data.errors) {
+          setFormError(response.data.errors);
+          console.log(formError);
+        } else {
+          setTriggerFetch(!triggerFetch);
+          setFormError({});
+          navigate("/products");
+          setItem({});
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <AppContext.Provider
       value={{
         item,
         items,
         formError,
+        loggedUser,
         handleDelete,
         handleEdit,
         fetchOne,
         fetchAdd,
+        getLoggedUser,
+        addToCart,
       }}>
       {children}
     </AppContext.Provider>
