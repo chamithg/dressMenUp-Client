@@ -32,10 +32,9 @@ export default function SingleItem() {
     const cartItem = {
       user: loggedUser._id,
       item: item,
+      cartObj: item,
       quantity: purchaseCount,
     };
-
-    console.log(cartItem);
 
     addToCart(cartItem, navigate);
   };

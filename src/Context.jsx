@@ -9,6 +9,7 @@ const Wrapper = ({ children }) => {
   const [formError, setFormError] = useState({});
   const [triggerFetch, setTriggerFetch] = useState(false);
   const [loggedUser, setLoggedUser] = useState({});
+  const [currentUserCart, setCurrentUserCart] = useState([]);
 
   // ! get fetch
 
@@ -124,12 +125,42 @@ const Wrapper = ({ children }) => {
         console.log("response after adding to cart", response);
         if (response.data.errors) {
           setFormError(response.data.errors);
-          console.log(formError);
         } else {
-          setTriggerFetch(!triggerFetch);
-          setFormError({});
+          alert("item added to cart");
           navigate("/products");
-          setItem({});
+        }
+      })
+      .catch((err) => console.log(err));
+
+    let updatedCartItem = cartItem.cartObj;
+    updatedCartItem.count -= cartItem.quantity;
+    axios
+      .put(
+        `http://localhost:8000/api/items/${updatedCartItem._id}/update`,
+        updatedCartItem
+      )
+      .then((response) => {
+        console.log("response after adding to cart", response);
+        if (response.data.errors) {
+          setFormError(response.data.errors);
+        } else {
+          alert("item added to cart");
+          navigate("/products");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //!get items in the current user cart
+
+  const getUserCart = (user) => {
+    axios
+      .get(`http://localhost:8000/api/cart/items/${user}`)
+      .then((response) => {
+        if (response) {
+          setCurrentUserCart(response.data.results.cartItems);
+        } else {
+          setCurrentUserCart([]);
         }
       })
       .catch((err) => console.log(err));
@@ -142,12 +173,14 @@ const Wrapper = ({ children }) => {
         items,
         formError,
         loggedUser,
+        currentUserCart,
         handleDelete,
         handleEdit,
         fetchOne,
         fetchAdd,
         getLoggedUser,
         addToCart,
+        getUserCart,
       }}>
       {children}
     </AppContext.Provider>

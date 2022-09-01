@@ -49,8 +49,11 @@ export default function Navbar() {
           <h4>Contact Us</h4>
         </li>
       </ul>
+
       <div className="cart-login">
-        <FaShoppingCart />
+        <Link to="/cart">
+          <FaShoppingCart />
+        </Link>
         <div onClick={() => logout()}>
           <FaUserAlt />
         </div>
