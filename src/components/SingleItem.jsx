@@ -99,7 +99,8 @@ export default function SingleItem() {
           </div>
 
           <button
-            className="btn btn-warning  btn-lg "
+            className="btn btn-warning  btn-lg"
+            disabled={item.count == 0 ? true : false}
             onClick={() => addItemToCart()}>
             <h4>Add to cart</h4>
           </button>

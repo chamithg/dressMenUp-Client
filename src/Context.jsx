@@ -166,6 +166,43 @@ const Wrapper = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
+  //! reomove one cart item
+
+  const removeOneCartItem = (itemToRemove, item, cartQuantity) => {
+    axios
+      .put(
+        `http://localhost:8000/api/cart/items/removeOneCartItem`,
+        itemToRemove
+      )
+      .then((response) => {
+        console.log("response after adding to cart", response);
+        if (response.data.errors) {
+          setFormError(response.data.errors);
+        } else {
+          alert("item added to cart");
+        }
+      })
+      .catch((err) => console.log(err));
+
+    let updatedCartItem = item.cartObj;
+    updatedCartItem.count += cartQuantity;
+
+    axios
+      .put(
+        `http://localhost:8000/api/items/${updatedCartItem._id}/update`,
+        updatedCartItem
+      )
+      .then((response) => {
+        console.log("response after adding to cart", response);
+        if (response.data.errors) {
+          setFormError(response.data.errors);
+        } else {
+          alert("item added to cart");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -181,6 +218,7 @@ const Wrapper = ({ children }) => {
         getLoggedUser,
         addToCart,
         getUserCart,
+        removeOneCartItem,
       }}>
       {children}
     </AppContext.Provider>
