@@ -126,25 +126,6 @@ const Wrapper = ({ children }) => {
         if (response.data.errors) {
           setFormError(response.data.errors);
         } else {
-          alert("item added to cart");
-          navigate("/products");
-        }
-      })
-      .catch((err) => console.log(err));
-
-    let updatedCartItem = cartItem.cartObj;
-    updatedCartItem.count -= cartItem.quantity;
-    axios
-      .put(
-        `http://localhost:8000/api/items/${updatedCartItem._id}/update`,
-        updatedCartItem
-      )
-      .then((response) => {
-        console.log("response after adding to cart", response);
-        if (response.data.errors) {
-          setFormError(response.data.errors);
-        } else {
-          alert("item added to cart");
           navigate("/products");
         }
       })
@@ -168,37 +149,34 @@ const Wrapper = ({ children }) => {
 
   //! reomove one cart item
 
-  const removeOneCartItem = (itemToRemove, item, cartQuantity) => {
+  const removeOneCartItem = (itemToRemove) => {
+    console.log("hellow");
     axios
       .put(
         `http://localhost:8000/api/cart/items/removeOneCartItem`,
         itemToRemove
       )
       .then((response) => {
-        console.log("response after adding to cart", response);
+        console.log("response after removing the cart item", response);
         if (response.data.errors) {
           setFormError(response.data.errors);
-        } else {
-          alert("item added to cart");
         }
+        getUserCart(itemToRemove.user);
       })
       .catch((err) => console.log(err));
+  };
 
-    let updatedCartItem = item.cartObj;
-    updatedCartItem.count += cartQuantity;
+  // ! increse / decrese item quantity by one
 
+  const changeByOne = (itemToInc) => {
     axios
-      .put(
-        `http://localhost:8000/api/items/${updatedCartItem._id}/update`,
-        updatedCartItem
-      )
+      .put(`http://localhost:8000/api/cart/items/changeCountByOne`, itemToInc)
       .then((response) => {
-        console.log("response after adding to cart", response);
+        console.log("response after increasing the item quatity", response);
         if (response.data.errors) {
           setFormError(response.data.errors);
-        } else {
-          alert("item added to cart");
         }
+        getUserCart(itemToInc.userId);
       })
       .catch((err) => console.log(err));
   };
@@ -219,6 +197,7 @@ const Wrapper = ({ children }) => {
         addToCart,
         getUserCart,
         removeOneCartItem,
+        changeByOne,
       }}>
       {children}
     </AppContext.Provider>

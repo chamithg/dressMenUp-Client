@@ -1,6 +1,6 @@
 import React from "react";
 import "./itemList.css";
-import { useGlobalContext } from "../Context";
+import { useGlobalContext } from "../../Context";
 import ItemThumb from "./ItemThumb";
 
 export default function ItemList() {

@@ -1,6 +1,6 @@
 import React from "react";
 import Filter from "./Filter";
-import ItemList from "./ItemList";
+import ItemList from "./itemList/ItemList";
 import Preview from "./Preview";
 import "./components.css";
 

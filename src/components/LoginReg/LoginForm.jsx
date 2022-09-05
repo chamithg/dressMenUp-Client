@@ -23,8 +23,8 @@ export default function LoginForm() {
         if (res.data.error) {
           setLoginFormErrors(res.data.error);
         } else {
+          navigate("/");
         }
-        navigate("/");
       })
       .catch((err) => {
         console.log("error when loggin in", err);

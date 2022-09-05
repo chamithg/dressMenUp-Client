@@ -6,7 +6,8 @@ import {
   FaPlus,
 } from "react-icons/fa";
 import { useParams, useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../Context";
+import { useGlobalContext } from "../../Context";
+import RatingMain from "../rating/RatingMain";
 import "./SingleItem.css";
 
 export default function SingleItem() {
@@ -73,37 +74,38 @@ export default function SingleItem() {
           </h3>
 
           <br />
-          <h3>
-            Stock:{" "}
-            <span>
-              {item.count > 0 ? `${item.count} available` : "Not in stock"}{" "}
-            </span>
-          </h3>
+
           <br />
           <div className="purchase-count-container ">
-            <FaMinus
-              onClick={() =>
-                setPurchaseCount(
-                  purchaseCount > 0 ? purchaseCount - 1 : purchaseCount
-                )
-              }
-            />
+            <button className="btn">
+              <FaMinus
+                onClick={() =>
+                  setPurchaseCount(
+                    purchaseCount > 1 ? purchaseCount - 1 : purchaseCount
+                  )
+                }
+              />
+            </button>
             <h3>{purchaseCount}</h3>
-            <FaPlus
-              onClick={() =>
-                setPurchaseCount(
-                  purchaseCount < item.count ? purchaseCount + 1 : purchaseCount
-                )
-              }
-            />
+            <button className="btn">
+              <FaPlus
+                onClick={() =>
+                  setPurchaseCount(
+                    purchaseCount < 10 ? purchaseCount + 1 : purchaseCount
+                  )
+                }
+              />
+            </button>
           </div>
 
           <button
             className="btn btn-warning  btn-lg"
-            disabled={item.count == 0 ? true : false}
             onClick={() => addItemToCart()}>
             <h4>Add to cart</h4>
           </button>
+        </div>
+        <div className="m-5 p-5 rating-main">
+          <RatingMain />
         </div>
       </div>
     </div>

@@ -3,10 +3,10 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Main from "./components/Main";
 import { Routes, Route } from "react-router-dom";
-import SingleItem from "./components/SingleItem";
+import SingleItem from "./components/itemList/SingleItem";
 import Home from "./components/Home";
 import LoginReg from "./components/LoginReg/LoginReg";
-import Cart from "./components/Cart";
+import Cart from "./components/cart/Cart";
 
 function App() {
   return (

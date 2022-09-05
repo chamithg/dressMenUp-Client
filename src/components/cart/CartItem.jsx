@@ -1,17 +1,38 @@
 import React from "react";
 import "./cartItem.css";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { useGlobalContext } from "../Context";
+import { useGlobalContext } from "../../Context";
 
 export default function CartItem(item) {
-  const { loggedUser, removeOneCartItem } = useGlobalContext();
+  const { loggedUser, getUserCart, removeOneCartItem, changeByOne } =
+    useGlobalContext();
   const handleRemove = () => {
     let itemToRemove = { user: loggedUser._id, itemId: item.item };
-    let currentQuantity = item.quantity;
-    removeOneCartItem(itemToRemove, item, currentQuantity);
+    removeOneCartItem(itemToRemove);
+    getUserCart(loggedUser._id);
   };
-  const handleAddOne = () => {};
-  const handleMinOne = () => {};
+  const handleAddOne = () => {
+    let itemToInc = item;
+    itemToInc = {
+      userId: loggedUser._id,
+      itemId: item._id,
+      quantity: item.quantity + 1,
+      price: item.cartObj.price * (item.quantity + 1),
+    };
+
+    changeByOne(itemToInc);
+  };
+  const handleMinOne = () => {
+    let itemToDec = item;
+    itemToDec = {
+      userId: loggedUser._id,
+      itemId: item._id,
+      quantity: item.quantity - 1,
+      price: item.cartObj.price * (item.quantity - 1),
+    };
+
+    changeByOne(itemToDec);
+  };
 
   return (
     <div>
