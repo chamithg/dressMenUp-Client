@@ -10,8 +10,15 @@ const Wrapper = ({ children }) => {
   const [triggerFetch, setTriggerFetch] = useState(false);
   const [loggedUser, setLoggedUser] = useState({});
   const [currentUserCart, setCurrentUserCart] = useState([]);
+  const [reviews, setReviews] = useState({});
+  const [allreviews, setAllReviews] = useState([]);
+
+  useEffect(() => {
+    setAllReviews(reviews.reviews);
+  }, [reviews]);
 
   // ! get fetch
+  //!-----------------------------------------------Item-------------------------------
 
   const fetch = () => {
     axios
@@ -19,7 +26,7 @@ const Wrapper = ({ children }) => {
       .then((res) => {
         setItems(res.data.results);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("err getting all item ", err));
   };
 
   useEffect(() => {
@@ -34,7 +41,7 @@ const Wrapper = ({ children }) => {
       .then((res) => {
         setItem(res.data.results);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("err getting one item ", err));
   };
 
   // ! create
@@ -43,10 +50,9 @@ const Wrapper = ({ children }) => {
     axios
       .post("http://localhost:8000/api/items/new", input)
       .then((response) => {
-        console.log("response after submitting", response);
         if (response.data.errors) {
           setFormError(response.data.errors);
-          console.log(formError);
+          console.log("error add new item" + formError);
         } else {
           setTriggerFetch(!triggerFetch);
           setFormError({});
@@ -54,7 +60,7 @@ const Wrapper = ({ children }) => {
           setItem({});
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("error add new item", err));
   };
 
   // ! delete fetch
@@ -63,10 +69,9 @@ const Wrapper = ({ children }) => {
     axios
       .delete(`http://localhost:8000/api/items/${id}/delete`)
       .then((res) => {
-        console.log(res);
         setTriggerFetch(!triggerFetch);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("error deleting item", err));
   };
   //! Edit fetch
 
@@ -74,10 +79,9 @@ const Wrapper = ({ children }) => {
     axios
       .put(`http://localhost:8000/api/items/${id}/update`, input)
       .then((response) => {
-        console.log("response after submitting", response);
         if (response.data.errors) {
           setFormError(response.data.errors);
-          console.log(formError);
+          console.log("error editing item", formError);
         } else {
           setTriggerFetch(!triggerFetch);
           setFormError({});
@@ -85,11 +89,11 @@ const Wrapper = ({ children }) => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log("error editing item", err);
       });
   };
 
-  //#all of below is user api calls
+  //!-----------------------------------------------User-------------------------------
 
   //! get logged user
 
@@ -99,12 +103,12 @@ const Wrapper = ({ children }) => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log("res when getting logged in user", res);
-
         //! this means user is logged in and can access the page
         if (res.data.results) {
           setLoggedUser(res.data.results);
         } else {
+          setFormError(res.data.errors);
+          console.log("error getting logged in user", formError);
           //! this means user is not logged in and cant access the page/ will be redirected
           navigate("/login");
         }
@@ -114,7 +118,7 @@ const Wrapper = ({ children }) => {
       });
   };
 
-  //#all of below is cart api calls
+  //!-----------------------------------------------Cart-------------------------------
 
   //!add to cart
 
@@ -122,14 +126,14 @@ const Wrapper = ({ children }) => {
     axios
       .post("http://localhost:8000/api/cart/items/add", cartItem)
       .then((response) => {
-        console.log("response after adding to cart", response);
         if (response.data.errors) {
           setFormError(response.data.errors);
+          console.log("error adding item to cart", formError);
         } else {
           navigate("/products");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("error adding item to cart", err));
   };
 
   //!get items in the current user cart
@@ -142,44 +146,76 @@ const Wrapper = ({ children }) => {
           setCurrentUserCart(response.data.results.cartItems);
         } else {
           setCurrentUserCart([]);
+          setFormError(response.data.errors);
+          console.log("error fetching current cart", formError);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("error fetching current cart", err));
   };
 
   //! reomove one cart item
 
   const removeOneCartItem = (itemToRemove) => {
-    console.log("hellow");
     axios
       .put(
         `http://localhost:8000/api/cart/items/removeOneCartItem`,
         itemToRemove
       )
       .then((response) => {
-        console.log("response after removing the cart item", response);
         if (response.data.errors) {
           setFormError(response.data.errors);
+          console.log("error remove item from cart", formError);
         }
         getUserCart(itemToRemove.user);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("error remove item from cart", err));
   };
 
-  // ! increse / decrese item quantity by one
+  // ! increse / decrease item quantity by one
 
   const changeByOne = (itemToInc) => {
     axios
       .put(`http://localhost:8000/api/cart/items/changeCountByOne`, itemToInc)
       .then((response) => {
-        console.log("response after increasing the item quatity", response);
         if (response.data.errors) {
           setFormError(response.data.errors);
+          console.log("error change cart item quantity", formError);
         }
         getUserCart(itemToInc.userId);
       })
+      .catch((err) => console.log("error change cart item quantity", err));
+  };
+
+  //!-----------------------------------------------Reviews-------------------------------
+
+  //!add to Reviews
+
+  const addToReviews = (newRating) => {
+    axios
+      .post("http://localhost:8000/api/ratings/new", newRating)
+      .then((response) => {
+        if (response.data.errors) {
+          setFormError(response.data.errors);
+          setFormError(response.data.errors);
+          console.log("error adding review", formError);
+        }
+      })
+      .catch((err) => console.log("error adding review", err));
+  };
+
+  const getReviews = (item_id) => {
+    axios
+      .get(`http://localhost:8000/api/ratings/${item_id}`)
+      .then((res) => {
+        if (res.data.results) {
+          setReviews(res.data.results);
+          console.log("reviews are", reviews);
+        }
+      })
       .catch((err) => console.log(err));
   };
+
+  //!get  Reviews
 
   return (
     <AppContext.Provider
@@ -189,6 +225,8 @@ const Wrapper = ({ children }) => {
         formError,
         loggedUser,
         currentUserCart,
+        reviews,
+        allreviews,
         handleDelete,
         handleEdit,
         fetchOne,
@@ -198,6 +236,8 @@ const Wrapper = ({ children }) => {
         getUserCart,
         removeOneCartItem,
         changeByOne,
+        addToReviews,
+        getReviews,
       }}>
       {children}
     </AppContext.Provider>

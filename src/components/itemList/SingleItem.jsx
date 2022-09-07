@@ -23,12 +23,6 @@ export default function SingleItem() {
     fetchOne(id);
   }, [switchImage]);
 
-  useEffect(() => {
-    fetchOne(id);
-    getLoggedUser(id, navigate);
-    console.log(loggedUser, item);
-  }, []);
-
   const addItemToCart = () => {
     const cartItem = {
       user: loggedUser._id,

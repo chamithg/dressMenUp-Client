@@ -19,7 +19,6 @@ export default function LoginForm() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log("Logged in successfully", res);
         if (res.data.error) {
           setLoginFormErrors(res.data.error);
         } else {

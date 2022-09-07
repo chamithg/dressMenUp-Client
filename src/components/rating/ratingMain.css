@@ -1,3 +1,7 @@
 .star {
   font-size: 2rem;
 }
+
+.form-hidden {
+  display: none;
+}
