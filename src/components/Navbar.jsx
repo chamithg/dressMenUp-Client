@@ -19,9 +19,6 @@ export default function Navbar() {
   };
   return (
     <div className="nav-main">
-      <div className="logo">
-        <h1>Dress Men Up!</h1>
-      </div>
       <ul>
         <li>
           <Link to="/">
@@ -42,12 +39,6 @@ export default function Navbar() {
         <li>
           <h4>Categories</h4>
         </li>
-        <li>
-          <h4>On Sale</h4>
-        </li>
-        <li>
-          <h4>Contact Us</h4>
-        </li>
       </ul>
 
       <div className="cart-login">
@@ -57,6 +48,11 @@ export default function Navbar() {
         <div onClick={() => logout()}>
           <FaUserAlt />
         </div>
+        <Link to="/add">
+          <button className="btn btn-primary">
+            <h4>Add items (admin)</h4>
+          </button>
+        </Link>
       </div>
     </div>
   );

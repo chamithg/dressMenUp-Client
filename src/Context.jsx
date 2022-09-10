@@ -10,12 +10,12 @@ const Wrapper = ({ children }) => {
   const [triggerFetch, setTriggerFetch] = useState(false);
   const [loggedUser, setLoggedUser] = useState({});
   const [currentUserCart, setCurrentUserCart] = useState([]);
-  const [reviews, setReviews] = useState({});
-  const [allreviews, setAllReviews] = useState([]);
-
-  useEffect(() => {
-    setAllReviews(reviews.reviews);
-  }, [reviews]);
+  const [typeFilter, setTypeFilter] = useState("");
+  const [priceFilter, setPriceFilter] = useState("");
+  const [sizeFilter, setSizeFilter] = useState("");
+  const [featuredFilter, setFeaturedFilter] = useState(false);
+  const [search, setSearch] = useState("");
+  const [featured, setFeatured] = useState([]);
 
   // ! get fetch
   //!-----------------------------------------------Item-------------------------------
@@ -24,14 +24,67 @@ const Wrapper = ({ children }) => {
     axios
       .get("http://localhost:8000/api/items")
       .then((res) => {
-        setItems(res.data.results);
+        let tempRes = res.data.results;
+        if (search !== "") {
+          tempRes = tempRes.filter((item) =>
+            item.name.toLowerCase().includes(search.toLowerCase())
+          );
+        }
+        if (featuredFilter) {
+          tempRes = tempRes.filter((item) => item.isFeatured);
+        }
+        if (typeFilter !== "") {
+          tempRes = tempRes.filter((item) => item.type === typeFilter);
+        }
+        if (sizeFilter !== "") {
+          tempRes = tempRes.filter((item) => item.size === sizeFilter);
+        }
+        if (priceFilter !== "") {
+          if (priceFilter === "25>") {
+            tempRes = tempRes.filter((item) => item.price <= 25);
+          }
+          if (priceFilter === "50>25") {
+            tempRes = tempRes.filter(
+              (item) => 25 < item.price && item.price <= 50
+            );
+          }
+          if (priceFilter === "75>50") {
+            tempRes = tempRes.filter(
+              (item) => 50 < item.price && item.price <= 75
+            );
+          }
+          if (priceFilter === ">75") {
+            tempRes = tempRes.filter((item) => item.price > 75);
+          }
+        }
+
+        setItems(tempRes);
       })
       .catch((err) => console.log("err getting all item ", err));
   };
 
   useEffect(() => {
     fetch();
-  }, [triggerFetch]);
+  }, [
+    triggerFetch,
+    typeFilter,
+    priceFilter,
+    sizeFilter,
+    search,
+    featuredFilter,
+  ]);
+  // ! get only featured
+
+  const getFeatured = () => {
+    axios
+      .get("http://localhost:8000/api/items")
+      .then((res) => {
+        let tempRes = res.data.results;
+        tempRes = tempRes.filter((item) => item.isFeatured);
+        setFeatured(tempRes);
+      })
+      .catch((err) => console.log("err getting featured ", err));
+  };
 
   // ! getOne fetch
 
@@ -191,6 +244,7 @@ const Wrapper = ({ children }) => {
   //!add to Reviews
 
   const addToReviews = (newRating) => {
+    console.log("newRate");
     axios
       .post("http://localhost:8000/api/ratings/new", newRating)
       .then((response) => {
@@ -203,18 +257,6 @@ const Wrapper = ({ children }) => {
       .catch((err) => console.log("error adding review", err));
   };
 
-  const getReviews = (item_id) => {
-    axios
-      .get(`http://localhost:8000/api/ratings/${item_id}`)
-      .then((res) => {
-        if (res.data.results) {
-          setReviews(res.data.results);
-          console.log("reviews are", reviews);
-        }
-      })
-      .catch((err) => console.log(err));
-  };
-
   //!get  Reviews
 
   return (
@@ -225,10 +267,15 @@ const Wrapper = ({ children }) => {
         formError,
         loggedUser,
         currentUserCart,
-        reviews,
-        allreviews,
+        typeFilter,
+        sizeFilter,
+        priceFilter,
+        search,
+        featured,
+        featuredFilter,
         handleDelete,
         handleEdit,
+        fetch,
         fetchOne,
         fetchAdd,
         getLoggedUser,
@@ -237,7 +284,12 @@ const Wrapper = ({ children }) => {
         removeOneCartItem,
         changeByOne,
         addToReviews,
-        getReviews,
+        setPriceFilter,
+        setTypeFilter,
+        setSizeFilter,
+        setSearch,
+        getFeatured,
+        setFeaturedFilter,
       }}>
       {children}
     </AppContext.Provider>

@@ -1,16 +1,20 @@
 import React from "react";
 import Filter from "./Filter";
 import ItemList from "./itemList/ItemList";
-import Preview from "./Preview";
+
+import "./general.css";
 import "./components.css";
 
 export default function Main() {
   return (
     <div>
       <div className="main-container d-flex m-1">
-        <Filter className="filter"></Filter>
-        <ItemList className="itemlist"></ItemList>
-        <Preview className="preview"></Preview>
+        <div className="filter-container">
+          <Filter className="filter"></Filter>
+        </div>
+        <div className="itemList-container">
+          <ItemList className="itemlist"></ItemList>
+        </div>
       </div>
     </div>
   );

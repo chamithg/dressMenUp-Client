@@ -1,0 +1,111 @@
+:root {
+  /* dark shades of primary color*/
+  --clr-primary-1: #abd699;
+  --clr-primary-2: #ffe26a;
+  --clr-primary-3: #75c9b7;
+  --clr-primary-4: #c7ddcc;
+  --clr-primary-5: #16123f;
+  /* primary/main color */
+
+  /* darkest grey - used for headings */
+  --clr-font-1: #16123f;
+  --clr-font-2: #2b2851;
+  --clr-font-3: #768479;
+  --clr-font-4: #8b7935;
+  --clr-font-5: #213c32;
+  /* grey used for paragraphs */
+  --clr-back-1: hsl(72, 13%, 47%);
+  --clr-back-2: hsl(209, 23%, 60%);
+  --clr-back-3: hsl(211, 27%, 70%);
+  --clr-back-4: hsl(210, 31%, 80%);
+  --clr-back-5: #dae2ec;
+  --clr-grey-10: hsl(210, 36%, 96%);
+  --clr-white: #fff;
+  --ff-primary: "Lato", sans-serif;
+  --transition: all 0.3s linear;
+  --spacing: 0.02rem;
+  --radius: 0.5rem;
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-main {
+  color: var(--clr-font-4);
+  width: 100vw;
+  padding-top: 2rem;
+  background: rgb(144, 182, 168);
+  background: linear-gradient(
+    0deg,
+    rgba(144, 182, 168, 1) 0%,
+    rgba(221, 228, 163, 1) 87%
+  );
+}
+
+.user-none {
+  height: 100vh;
+  width: 100vw;
+  background: rgb(144, 182, 168);
+  background: linear-gradient(
+    0deg,
+    rgba(144, 182, 168, 1) 0%,
+    rgba(221, 228, 163, 1) 87%
+  );
+}
+
+.cart-header {
+  padding-left: 15vw;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.cart-item-container {
+  width: 60vw;
+}
+.checkout-pannel {
+  border-radius: 1rem;
+  width: 60vw;
+}
+
+.cart-main {
+  display: flex;
+  flex-direction: column;
+}
+.checkout {
+  text-align: center;
+  display: block;
+  height: 2rem;
+  width: 12rem;
+  padding: 0.2rem;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.checkout-card {
+  background-color: var(--clr-back-4);
+  width: 60vw;
+  text-align: right;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--light-shadow);
+  transition: var(--transition);
+}
+.line {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+@media screen and (min-width: 992px) {
+  .cart-main {
+    flex-direction: row;
+  }
+  .checkout-pannel {
+    margin-left: 2rem;
+    width: 30vw;
+    right: 3rem;
+    height: fit-content;
+  }
+  .checkout-card {
+    position: fixed;
+    width: 30vw;
+  }
+}

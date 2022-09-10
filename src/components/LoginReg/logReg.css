@@ -1,0 +1,21 @@
+.main {
+  padding: 2rem;
+  width: 30vw;
+  min-width: 380px;
+  transition: all 0.3s linear;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  background: whitesmoke;
+  margin-top: 2rem;
+  height: fit-content;
+}
+
+.body-container {
+  height: 100vh;
+  width: 100vw;
+  background: rgb(144, 182, 168);
+  background: linear-gradient(
+    0deg,
+    rgba(144, 182, 168, 1) 0%,
+    rgba(221, 228, 163, 1) 87%
+  );
+}

@@ -1,26 +1,32 @@
 import React, { useState, useEffect } from "react";
+import "./../../components/general.css";
 import "./ratingMain.css";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { useGlobalContext } from "../../Context";
 import { useParams } from "react-router-dom";
 import SingleRating from "./SingleRating";
 
-function RatingMain() {
-  const { loggedUser, addToReviews, item, getReviews, allReviews } =
-    useGlobalContext();
+function RatingMain(reviews) {
+  const { loggedUser, addToReviews, item, getLoggedUser } = useGlobalContext();
 
   const [showRateForm, setShowRateForm] = useState(false);
   const [rating, setRating] = useState(1);
   const [heading, setHeading] = useState(1);
   const [reason, setReason] = useState(1);
+  const [errors, setError] = useState("");
 
   const item_id = item._id;
-  console.log(item_id);
+
   useEffect(() => {
-    getReviews(item_id);
-  }, [item]);
+    getLoggedUser();
+    console.log(loggedUser.errors);
+  }, []);
 
   const handleAddRating = () => {
+    if (!loggedUser) {
+      setError("no logged in user");
+      return alert("please log in to add reviews");
+    }
     const newRating = {
       item: item_id,
       review: {
@@ -31,29 +37,70 @@ function RatingMain() {
         reason: reason,
       },
     };
+    console.log("newRating", newRating);
     addToReviews(newRating);
   };
-
-  console.log("reviews" + allReviews);
 
   return (
     <div className="rate-main">
       Customer Ratings
-      <div className="star-container">
-        <FaStar className="star" />
-        <FaRegStar className="star" />
-        <FaRegStar className="star" />
-        <FaRegStar className="star" />
-        <FaRegStar className="star" />
+      <div className="main-star-container">
+        {reviews.oRating === 1 ? (
+          <div className="star-container">
+            <FaStar className="star" />
+            <FaRegStar className="star" />
+            <FaRegStar className="star" />
+            <FaRegStar className="star" />
+            <FaRegStar className="star" />
+          </div>
+        ) : reviews.oRating === 2 ? (
+          <div className="star-container">
+            <FaStar className="star" />
+            <FaStar className="star" />
+            <FaRegStar className="star" />
+            <FaRegStar className="star" />
+            <FaRegStar className="star" />
+          </div>
+        ) : reviews.oRating === 3 ? (
+          <div className="star-container">
+            <FaStar className="star" />
+            <FaStar className="star" />
+            <FaStar className="star" />
+            <FaRegStar className="star" />
+            <FaRegStar className="star" />
+          </div>
+        ) : reviews.oRating === 4 ? (
+          <div className="star-container">
+            <FaStar className="star" />
+            <FaStar className="star" />
+            <FaStar className="star" />
+            <FaStar className="star" />
+            <FaRegStar className="star" />
+          </div>
+        ) : reviews.oRating === 5 ? (
+          <div className="star-container">
+            <FaStar className="star" />
+            <FaStar className="star" />
+            <FaStar className="star" />
+            <FaStar className="star" />
+            <FaStar className="star" />
+          </div>
+        ) : (
+          "none"
+        )}
       </div>
-      <h2>N/5</h2>
-      <button
-        className="btn btn-info m-2"
-        onClick={() => setShowRateForm(!showRateForm)}>
-        <h4>Review this product</h4>
-      </button>
+      <h2>{reviews.oRating}/5</h2>
+      {errors ? <h2>{errors}</h2> : null}
+      {loggedUser.firstName ? (
+        <button
+          className="button"
+          onClick={() => setShowRateForm(!showRateForm)}>
+          <h4>Review this product</h4>
+        </button>
+      ) : null}
       <div className={showRateForm ? "review-form" : "form-hidden"}>
         <h3>Add your review</h3>
+
         <form onSubmit={handleAddRating}>
           <div className="form-group m-1">
             <input
@@ -84,13 +131,11 @@ function RatingMain() {
               onChange={(e) => setReason(e.target.value)}
             />
           </div>
-          <input className="btn btn-primary w-100 mt-2" type="submit" />
+          <input className="submit button" type="submit" value="Add" />
         </form>
-        <div>
-          {/* {allReviews.map((rev) => {
-            <SingleRating {...rev} />;
-          })} */}
-        </div>
+      </div>
+      <div className="ratingList">
+        {reviews ? <SingleRating {...reviews} /> : null}
       </div>
     </div>
   );

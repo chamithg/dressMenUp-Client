@@ -1,0 +1,127 @@
+:root {
+  /* dark shades of primary color*/
+  --clr-primary-1: #abd699;
+  --clr-primary-2: #ffe26a;
+  --clr-primary-3: #75c9b7;
+  --clr-primary-4: #c7ddcc;
+  --clr-primary-5: #16123f;
+  /* primary/main color */
+
+  /* darkest grey - used for headings */
+  --clr-font-1: #16123f;
+  --clr-font-2: #2b2851;
+  --clr-font-3: #768479;
+  --clr-font-4: #8b7935;
+  --clr-font-5: #213c32;
+  /* grey used for paragraphs */
+  --clr-back-1: hsl(72, 13%, 47%);
+  --clr-back-2: hsl(209, 23%, 60%);
+  --clr-back-3: hsl(211, 27%, 70%);
+  --clr-back-4: hsl(210, 31%, 80%);
+  --clr-back-5: #dae2ec;
+  --clr-grey-10: hsl(210, 36%, 96%);
+  --clr-white: #fff;
+  --ff-primary: "Lato", sans-serif;
+  --transition: all 0.1s linear;
+  --spacing: 0.02rem;
+  --radius: 0.5rem;
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --white-shadow: 0 5px 20px rgba(249, 254, 255, 0.3);
+  --white-shadow2: 0 5px 20px rgba(249, 254, 255, 0.5);
+}
+
+.section-center {
+  width: 60vw;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  height: fit-content;
+  max-height: 35rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  background-color: var(--clr-white);
+  box-shadow: var(--light-shadow);
+  transition: var(--transition);
+}
+.section-center:hover {
+  box-shadow: var(--white-shadow2);
+}
+.cart-Img {
+  width: 200px;
+  object-fit: contain;
+  margin: auto;
+}
+.button:hover {
+  background-color: orange;
+}
+.desc {
+  min-width: 25vw;
+  max-width: 50vw;
+}
+.cart-img-container {
+  max-height: 17rem;
+}
+
+.cart-title {
+  color: var(--clr-font-3);
+}
+
+.price {
+  color: var(--clr-font-2);
+  font-weight: 200;
+}
+.price-conainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.purchase-count-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.qbtn {
+  background-color: var(--clr-font-3);
+  transition: var(--transition);
+  font-size: 2rem;
+  color: var(--clr-font-2);
+  height: 2.4rem;
+  padding: 10px;
+  display: block;
+  border-radius: 50%;
+  box-shadow: var(--dark-shadow);
+}
+.qbtn:hover {
+  background-color: var(--clr-primary-1);
+}
+.qinfo {
+  transition: var(--transition);
+  display: block;
+  font-weight: 700;
+  margin: 1rem;
+  margin-top: 0.5rem;
+}
+.line {
+  background-color: var(--clr-font-4);
+  height: 2px;
+  width: 100%;
+  margin-bottom: 2rem;
+  box-shadow: var(--dark-shadow);
+}
+.subtotal {
+  color: var(--clr-font-5);
+  font-size: 1.8rem;
+}
+.stSpan {
+  color: var(--clr-font-4);
+}
+@media screen and (min-width: 992px) {
+  .section-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 18rem;
+  }
+}

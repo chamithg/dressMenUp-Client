@@ -8,46 +8,71 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../Context";
 import RatingMain from "../rating/RatingMain";
+import "./../../components/general.css";
 import "./SingleItem.css";
+import axios from "axios";
 
 export default function SingleItem() {
   const { fetchOne, item, loggedUser, getLoggedUser, addToCart } =
     useGlobalContext();
   const [switchImage, setSwitchImage] = useState(false);
   const [purchaseCount, setPurchaseCount] = useState(1);
+  const [reviews, setReviews] = useState({});
 
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const getReviews = (item_id) => {
+    axios
+      .get(`http://localhost:8000/api/ratings/${item_id}`)
+      .then((res) => {
+        if (res.data.results) {
+          setReviews(res.data.results);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     fetchOne(id);
   }, [switchImage]);
 
-  const addItemToCart = () => {
-    const cartItem = {
-      user: loggedUser._id,
-      item: item,
-      cartObj: item,
-      quantity: purchaseCount,
-    };
+  useEffect(() => {
+    getReviews(id);
+  }, []);
 
-    addToCart(cartItem, navigate);
+  const addItemToCart = () => {
+    if (loggedUser.firstName) {
+      const cartItem = {
+        user: loggedUser._id,
+        item: item,
+        cartObj: item,
+        quantity: purchaseCount,
+      };
+
+      addToCart(cartItem, navigate);
+    } else {
+      alert("Please login / registert before making purchases");
+    }
   };
 
   return (
-    <div className="item-main">
-      <div className="item-container w-75 m-5 d-flex justify-content-center">
-        <div className="image-container d-flex justify-content-center">
+    <div className="item-main d-flex justify-content-center">
+      <div className="item-container">
+        <div className="image-container">
           <div>
             <FaArrowAltCircleLeft
               className="arrow-btn"
               onClick={() => setSwitchImage(!switchImage)}
             />
           </div>
-          <img
-            src={switchImage ? item.img1 : item.img2}
-            alt=" productPicture"
-          />
+          <div className="product_img_container">
+            <img
+              className="product_img"
+              src={switchImage ? item.img1 : item.img2}
+              alt=" productPicture"
+            />
+          </div>
           <div>
             <FaArrowAltCircleRight
               className="arrow-btn"
@@ -55,8 +80,8 @@ export default function SingleItem() {
             />
           </div>
         </div>
-        <div className="product-detail-container align-item-left">
-          <h2>{item.name}</h2>
+        <div className="product-detail-container">
+          <h2 className="heading">{item.name}</h2>
           <br />
           <h3>Type: {item.type}</h3>
           <br />
@@ -80,7 +105,9 @@ export default function SingleItem() {
                 }
               />
             </button>
-            <h3>{purchaseCount}</h3>
+            <div className="purchase-count">
+              <h3>{purchaseCount}</h3>
+            </div>
             <button className="btn">
               <FaPlus
                 onClick={() =>
@@ -93,13 +120,14 @@ export default function SingleItem() {
           </div>
 
           <button
-            className="btn btn-warning  btn-lg"
+            className="button add-to-cart"
             onClick={() => addItemToCart()}>
             <h4>Add to cart</h4>
           </button>
         </div>
-        <div className="m-5 p-5 rating-main">
-          <RatingMain />
+
+        <div className="rating-main">
+          {reviews ? <RatingMain {...reviews} /> : null}
         </div>
       </div>
     </div>

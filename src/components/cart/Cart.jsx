@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import "./../../components/general.css";
+import { Link } from "react-router-dom";
 import "./cart.css";
 import { useGlobalContext } from "../../Context";
 
@@ -26,9 +28,9 @@ export default function Cart() {
 
   if (loggedUser.firstName) {
     return (
-      <div>
+      <div className="card-main">
         <div className="cart-header">
-          <h1>{loggedUser.firstName}, Here is your cart items!</h1>
+          <h2>{loggedUser.firstName}, Here is your cart items!</h2>
         </div>
         <div className="cart-body d-flex justify-content-center">
           <div className="cart-main">
@@ -37,10 +39,30 @@ export default function Cart() {
                 return <CartItem {...item} />;
               })}
             </div>
+            <div className="checkout-pannel">
+              <div className="checkout-card">
+                <h4>
+                  Order total :{" "}
+                  <span className="ctSpan"> ${getcartTotal().toFixed(2)}</span>
+                </h4>
+                <h4>
+                  Est. tax(10%) :{" "}
+                  <span className="ctSpan">
+                    $ {(getcartTotal() / 10).toFixed(2)}
+                  </span>
+                </h4>
+                <div className="line"></div>
+                <h4>
+                  Grand total :{" "}
+                  <span className="ctSpan">
+                    $ {(getcartTotal() + getcartTotal() / 10).toFixed(2)}
+                  </span>
+                </h4>
 
-            <h1>Your total is : ${getcartTotal()}</h1>
-            <div className="btn btn-success btn-lg p-4 text-dark m-4">
-              <h3>Checkout</h3>
+                <div className="button checkout">
+                  <h4>Checkout</h4>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -48,8 +70,13 @@ export default function Cart() {
     );
   } else {
     return (
-      <div className="d-flex justify-content-center">
-        Please login or register to add or view items in the cart!
+      <div className="user-none d-flex justify-content-center p-5">
+        <div>
+          <h4>Please login or register to add or view items in the cart!</h4>
+          <Link to={"/login"}>
+            <button className="button m-5">Login / Register</button>
+          </Link>
+        </div>
       </div>
     );
   }

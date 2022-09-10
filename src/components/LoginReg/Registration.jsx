@@ -85,11 +85,7 @@ export default function Registration() {
           />
           <p className="text-danger"> {formErrors.confirm?.message}</p>
         </div>
-        <input
-          type="submit"
-          className="btn-primary btn-lg m-3"
-          value="Register"
-        />
+        <input type="submit" className="button m-3" value="Register" />
       </form>
     </div>
   );
