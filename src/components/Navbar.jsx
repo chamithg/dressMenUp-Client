@@ -26,11 +26,6 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/products">
-            <h4>Shop All</h4>
-          </Link>
-        </li>
-        <li>
           <h4>About Us</h4>
         </li>
         <li>

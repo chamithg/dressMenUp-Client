@@ -1,0 +1,115 @@
+.about-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: whitesmoke;
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+.abt-text {
+  color: var(--clr-font-4);
+}
+.about-left {
+  display: none;
+}
+
+.about-right {
+  z-index: 1;
+  color: var(--clr-primary-4);
+  text-align: center;
+  padding: 2rem;
+  padding-top: 5rem;
+  width: 100vw;
+  height: fit-content;
+  background: rgb(208, 219, 23);
+  background: radial-gradient(
+    circle,
+    rgba(215, 220, 206, 0.933) 0%,
+    rgb(206, 213, 104) 100%
+  );
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  padding-top: 5rem;
+  border-top-left-radius: 5rem;
+}
+.user {
+  color: var(--clr-font-2);
+}
+
+.btn {
+  color: var(--clr-font-2);
+  transition: all 0.4s ease-in-out;
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+.about-image {
+  width: 40vw;
+  height: 30rem;
+}
+.shop-all {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  background: var(--clr-primary-2);
+  text-shadow: var(--dark-shadow);
+}
+.logo {
+  color: var(--clr-font-2);
+  text-shadow: var(--dark-shadow);
+}
+.shop-all:hover {
+  background: var(--clr-primary-3);
+  border: none;
+  box-shadow: var(--white-shadow);
+  color: var(--clr-font-4);
+}
+
+@media screen and (min-width: 1600px) {
+  .about-left {
+    display: flex;
+    width: 60vw;
+    height: fit-content;
+  }
+  .abt-image3,
+  .abt-image4 {
+    height: 40rem;
+    object-fit: cover;
+    margin: 1rem;
+  }
+  .abt-image2,
+  .abt-image1 {
+    height: 20rem;
+    object-fit: cover;
+    margin: 1rem;
+  }
+
+  .abt-image1 {
+    position: relative;
+    box-shadow: var(--dark-shadow);
+    z-index: 2;
+    top: 1rem;
+    left: -6rem;
+  }
+  .abt-image3 {
+    z-index: 2;
+    box-shadow: var(--white-shadow);
+  }
+  .abt-image2 {
+    z-index: 3;
+    position: relative;
+    left: -3rem;
+    top: -5rem;
+    box-shadow: var(--white-shadow);
+  }
+  .abt-image4 {
+    position: relative;
+    left: -10rem;
+    z-index: 1;
+  }
+  .about-right {
+    width: 40vw;
+    height: 30rem;
+    text-align: left;
+  }
+}

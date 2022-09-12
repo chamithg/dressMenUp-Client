@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
+import { FaAngleDoubleRight } from "react-icons/fa";
 import "./Banner.css";
 import banner from "../Assets/banner.jpeg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useGlobalContext } from "../../Context";
 
 export default function Banner() {
@@ -24,9 +25,14 @@ export default function Banner() {
         </div>
         <br />
         <h2>Treat yourself with some fine Clothing..</h2>
-        <button className="btn">
-          <h2>Take a look ...</h2>
-        </button>
+        <Link to="/products">
+          <button className="btn shop-all">
+            <h3>
+              Take a look
+              <FaAngleDoubleRight />
+            </h3>
+          </button>
+        </Link>
       </div>
       <div className="banner-right">
         <img className="banner-image" src={banner} alt="baner" />

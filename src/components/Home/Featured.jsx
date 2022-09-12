@@ -55,20 +55,26 @@ export default function Featured() {
                   />
                   <div className="featured-info">
                     <br />
-                    <h4>then</h4>
-                    <h2 className="then">${slide.oldPrice}</h2>
-                    <br />
-                    <br />
-                    <h4>Now</h4>
-                    <h1>
-                      <span className="now">${slide.price}</span>
-                    </h1>
-                    <br />
-                    <h4>Save</h4>
-                    <h2>
-                      <span className="now">{slide.discount}%</span>
-                    </h2>
-                    <h4>today..</h4>
+                    <div className="info-body">
+                      <div>
+                        <h4>then</h4>
+                        <h2 className="then">${slide.oldPrice}</h2>
+                      </div>
+                      <div>
+                        <h4>Now</h4>
+
+                        <h1>
+                          <span className="now">${slide.price}</span>
+                        </h1>
+                      </div>
+                      <div className="mt-3">
+                        <h4>Save</h4>
+                        <h2>
+                          <span className="now">{slide.discount}%</span>
+                        </h2>
+                        <h4>today..</h4>
+                      </div>
+                    </div>
                     <button
                       className="button mt-2"
                       onClick={() => handleFeatured()}>

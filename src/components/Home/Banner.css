@@ -37,13 +37,10 @@
 }
 
 .banner-right {
-  width: 40vw;
-  height: 30rem;
+  display: none;
 }
 
 .banner-left {
-  width: 60vw;
-  height: 30rem;
   z-index: 1;
   background-color: rgb(40, 39, 39);
   color: var(--clr-primary-4);
@@ -51,6 +48,8 @@
   padding: 2rem;
   padding-top: 5rem;
   background: var(--clr-back-1);
+  width: 100vw;
+  height: fit-content;
 }
 .user {
   color: var(--clr-font-2);
@@ -66,4 +65,38 @@
 .banner-image {
   width: 40vw;
   height: 30rem;
+}
+.shop-all {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  background: var(--clr-primary-2);
+  text-shadow: var(--dark-shadow);
+}
+.logo {
+  color: var(--clr-font-2);
+  text-shadow: var(--dark-shadow);
+}
+.shop-all:hover {
+  background: var(--clr-primary-3);
+  border: none;
+  box-shadow: var(--white-shadow);
+  color: var(--clr-font-4);
+}
+
+@media screen and (min-width: 1250px) {
+  .banner-right {
+    display: block;
+    width: 40vw;
+    height: 30rem;
+  }
+  .banner-image {
+    height: 30rem;
+    height: 100%;
+    object-fit: cover;
+  }
+  .banner-left {
+    width: 60vw;
+    height: 30rem;
+    text-align: left;
+  }
 }

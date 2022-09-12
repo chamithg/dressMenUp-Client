@@ -1,34 +1,3 @@
-:root {
-  /* dark shades of primary color*/
-  --clr-primary-1: #abd699;
-  --clr-primary-2: #ffe26a;
-  --clr-primary-3: #75c9b7;
-  --clr-primary-4: #c7ddcc;
-  --clr-primary-5: #16123f;
-  /* primary/main color */
-
-  /* darkest grey - used for headings */
-  --clr-font-1: #16123f;
-  --clr-font-2: #2b2851;
-  --clr-font-3: #768479;
-  --clr-font-4: #8b7935;
-  --clr-font-5: #213c32;
-  /* grey used for paragraphs */
-  --clr-back-1: hsl(72, 13%, 47%);
-  --clr-back-2: hsl(209, 23%, 60%);
-  --clr-back-3: hsl(211, 27%, 70%);
-  --clr-back-4: hsl(210, 31%, 80%);
-  --clr-back-5: #dae2ec;
-  --clr-grey-10: hsl(210, 36%, 96%);
-  --clr-white: #fff;
-  --ff-primary: "Lato", sans-serif;
-  --transition: all 0.3s linear;
-  --spacing: 0.02rem;
-  --radius: 0.5rem;
-  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
 .card-main {
   color: var(--clr-font-4);
   width: 100vw;

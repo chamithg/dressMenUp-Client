@@ -82,18 +82,15 @@ export default function SingleItem() {
         </div>
         <div className="product-detail-container">
           <h2 className="heading">{item.name}</h2>
-          <br />
+
           <h3>Type: {item.type}</h3>
-          <br />
+
           <h3>${item.price}</h3>
           <p>{item.desc}</p>
-          <br />
+
           <h3>
             Size: <span>{item.size}</span>
           </h3>
-
-          <br />
-
           <br />
           <div className="purchase-count-container ">
             <button className="btn">
