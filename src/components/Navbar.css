@@ -24,7 +24,7 @@ li {
 }
 .cart-count {
   background: red;
-  color: black;
+  color: blue;
   padding: 6px 6px;
   height: fit-content;
   min-width: 35px;
