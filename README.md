@@ -1,3 +1,5 @@
+This is the Client side of the "Dress Men Up " full stack MERN app. this whole folder should be inside of the DressMenUp-server  root folder.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
