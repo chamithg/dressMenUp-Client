@@ -82,8 +82,31 @@ p {
   border-bottom-right-radius: 1rem;
   box-shadow: var(--dark-shadow);
 }
+.item-name {
+  width: 100;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.button-container {
+  margin-bottom: 1rem;
+}
 .add-to {
   border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.edit {
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  position: relative;
+  right: 1rem;
+}
+
+.delete {
+  border-radius: 50%;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 992px) {

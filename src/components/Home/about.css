@@ -109,7 +109,7 @@
   }
   .about-right {
     width: 40vw;
-    height: 30rem;
+    height: fit-content;
     text-align: left;
   }
 }

@@ -1,6 +1,8 @@
 .card-main {
   color: var(--clr-font-4);
   width: 100vw;
+  height: fit-content;
+  min-height: 100vh;
   padding-top: 2rem;
   background: rgb(144, 182, 168);
   background: linear-gradient(

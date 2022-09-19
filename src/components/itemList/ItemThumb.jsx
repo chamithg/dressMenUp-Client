@@ -1,10 +1,9 @@
 import React from "react";
 import "./../../components/general.css";
 import { useGlobalContext } from "../../Context";
-import { useNavigate } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
+import { useNavigate, Link } from "react-router-dom";
+import { FaShoppingCart, FaEdit, FaTrash } from "react-icons/fa";
 import "./itemThumb.css";
-import { Link } from "react-router-dom";
 export default function ItemThumb({ img2, name, price, _id }) {
   const navigate = useNavigate();
 
@@ -31,16 +30,35 @@ export default function ItemThumb({ img2, name, price, _id }) {
           <img className="thumb-image" src={img2} alt="item" />
         </div>
         <div className="info-container">
-          <h4>{name}</h4>
-          <div className="d-flex justify-content-between">
+          <h4 className="item-name">{name}</h4>
+          <div className="d-flex justify-content-between button-container ">
             <span>
               <h4 className="item-price"> ${price}</h4>
             </span>
-            <button className="button add-to" onClick={() => addItemToCart()}>
-              <h4>
-                <FaShoppingCart />
-              </h4>
-            </button>
+            {loggedUser._id === "632296e9e47a5881568339ab" ? (
+              <div>
+                <Link to={`/edit/${_id}`}>
+                  <button className="admin-button edit">
+                    <h4>
+                      <FaEdit />
+                    </h4>
+                  </button>
+                </Link>
+                <button
+                  className="admin-button delete"
+                  onClick={() => addItemToCart()}>
+                  <h4>
+                    <FaTrash />
+                  </h4>
+                </button>
+              </div>
+            ) : (
+              <button className="button add-to" onClick={() => addItemToCart()}>
+                <h4>
+                  <FaShoppingCart />
+                </h4>
+              </button>
+            )}
           </div>
         </div>
       </Link>

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useGlobalContext } from "../../Context";
 
 export default function Registration() {
   let [firstName, setFirstName] = useState("");
@@ -8,30 +8,16 @@ export default function Registration() {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [confirm, setConfirm] = useState("");
-  let [formErrors, setFormErrors] = useState({});
 
   const navigate = useNavigate();
+  const { getLoggedUser, setReg, regFormErrors } = useGlobalContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let formInfo = { firstName, lastName, email, password, confirm };
-
-    axios
-      .post("http://localhost:8000/api/users/register", formInfo, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log("res after reg", res);
-        if (res.data.errors) {
-          setFormErrors(res.data.errors);
-        } else {
-          navigate("/");
-        }
-      })
-      .catch((err) => {
-        console.log("there was an error", err);
-      });
+    setReg(formInfo, navigate);
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -43,7 +29,7 @@ export default function Registration() {
             className="form-control"
             onChange={(e) => setFirstName(e.target.value)}
           />
-          <p className="text-danger"> {formErrors.firstName?.message}</p>
+          <p className="text-danger"> {regFormErrors.firstName?.message}</p>
         </div>
         <div className="form-group">
           <label>Last Name</label>
@@ -53,7 +39,7 @@ export default function Registration() {
             className="form-control"
             onChange={(e) => setLastName(e.target.value)}
           />
-          <p className="text-danger"> {formErrors.lastName?.message}</p>
+          <p className="text-danger"> {regFormErrors.lastName?.message}</p>
         </div>
         <div className="form-group">
           <label>Email</label>
@@ -63,7 +49,7 @@ export default function Registration() {
             className="form-control"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <p className="text-danger">{formErrors.email?.message}</p>
+          <p className="text-danger">{regFormErrors.email?.message}</p>
         </div>
         <div className="form-group">
           <label>Password</label>
@@ -73,7 +59,7 @@ export default function Registration() {
             className="form-control"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <p className="text-danger"> {formErrors.password?.message}</p>
+          <p className="text-danger"> {regFormErrors.password?.message}</p>
         </div>
         <div className="form-group">
           <label>confirm Password</label>
@@ -83,7 +69,7 @@ export default function Registration() {
             className="form-control"
             onChange={(e) => setConfirm(e.target.value)}
           />
-          <p className="text-danger"> {formErrors.confirm?.message}</p>
+          <p className="text-danger"> {regFormErrors.confirm?.message}</p>
         </div>
         <input type="submit" className="button m-3" value="Register" />
       </form>

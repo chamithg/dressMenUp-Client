@@ -10,7 +10,6 @@ export default function About() {
   return (
     <div className="about-main">
       <div className="about-left">
-        c
         <img className="abt-image3" src={about3} alt="baner" />
         <div>
           <img className="abt-image1" src={about1} alt="baner" />

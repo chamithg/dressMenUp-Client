@@ -1,33 +1,19 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../../Context";
 
 export default function LoginForm() {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
 
-  let [loginFormErrors, setLoginFormErrors] = useState("");
+  const { getLoggedUser, setLogin, loginFormErrors } = useGlobalContext();
 
   const navigate = useNavigate();
 
   const login = (e) => {
     e.preventDefault();
-    // attach the form info
     let formInfo = { email, password };
-    axios
-      .post("http://localhost:8000/api/users/login", formInfo, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (res.data.error) {
-          setLoginFormErrors(res.data.error);
-        } else {
-          navigate("/");
-        }
-      })
-      .catch((err) => {
-        console.log("error when loggin in", err);
-      });
+    setLogin(formInfo, navigate);
   };
 
   return (

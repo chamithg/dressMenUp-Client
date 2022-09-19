@@ -3,7 +3,6 @@ import "./../../components/general.css";
 import "./ratingMain.css";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { useGlobalContext } from "../../Context";
-import { useParams } from "react-router-dom";
 import SingleRating from "./SingleRating";
 
 function RatingMain(reviews) {

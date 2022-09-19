@@ -114,7 +114,7 @@ p {
 /*  global classes */
 
 .button {
-  text-transform: uppercase;
+  text-transform: capitalize;
   background: var(--clr-primary-2);
   color: var(--clr-font-3);
   padding: 0.5rem 0.75rem;
@@ -136,6 +136,29 @@ p {
   transform: scale(1.02);
 }
 
+.admin-button {
+  text-transform: capitalize;
+  background: var(--clr-primary-5);
+  color: red;
+  padding: 0.5rem 0.75rem;
+  letter-spacing: var(--spacing);
+  display: inline-block;
+  /* font-weight: 700; */
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
+  font-size: 0.7rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(27, 26, 26, 0.992);
+  border-radius: 0.5rem;
+}
+.admin-button:hover {
+  background: var(--clr-font-2);
+  color: orange;
+  border: 2px solid transparent;
+  color: var(--clr-font-3);
+  transform: scale(1.02);
+}
 .section {
   padding: 5rem 0;
 }

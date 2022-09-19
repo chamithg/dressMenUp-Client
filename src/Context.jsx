@@ -16,6 +16,9 @@ const Wrapper = ({ children }) => {
   const [featuredFilter, setFeaturedFilter] = useState(false);
   const [search, setSearch] = useState("");
   const [featured, setFeatured] = useState([]);
+  const [loginFormErrors, setLoginFormErrors] = useState("");
+  const [regFormErrors, setRegFormErrors] = useState({});
+  const [cartQuentity, setCartQuentity] = useState();
 
   // ! get fetch
   //!-----------------------------------------------Item-------------------------------
@@ -150,7 +153,7 @@ const Wrapper = ({ children }) => {
 
   //! get logged user
 
-  const getLoggedUser = (navigate) => {
+  const getLoggedUser = () => {
     axios
       .get("http://localhost:8000/api/users/getloggedinuser", {
         withCredentials: true,
@@ -163,11 +166,55 @@ const Wrapper = ({ children }) => {
           setFormError(res.data.errors);
           console.log("error getting logged in user", formError);
           //! this means user is not logged in and cant access the page/ will be redirected
-          navigate("/login");
         }
       })
       .catch((err) => {
         console.log("error when getting logged in user", err);
+      });
+  };
+
+  //! LOGIN
+
+  const setLogin = (formInfo, navigate) => {
+    axios
+      .post("http://localhost:8000/api/users/login", formInfo, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data.error) {
+          setLoginFormErrors(res.data.error);
+        } else {
+          setCurrentUserCart([]);
+          setLoggedUser(res.data.results);
+          setLoginFormErrors("");
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log("error when loggin in", err);
+      });
+  };
+
+  //!REG
+
+  const setReg = (formInfo, navigate) => {
+    axios
+      .post("http://localhost:8000/api/users/register", formInfo, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log("res after reg", res);
+        if (res.data.errors) {
+          setRegFormErrors(res.data.errors);
+        } else {
+          setCurrentUserCart([]);
+          setLoggedUser(res.data.results);
+          setRegFormErrors({});
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log("there was an error", err);
       });
   };
 
@@ -196,9 +243,16 @@ const Wrapper = ({ children }) => {
       .get(`http://localhost:8000/api/cart/items/${user}`)
       .then((response) => {
         if (response) {
+          console.log(response);
           setCurrentUserCart(response.data.results.cartItems);
+          let cartTotal = 0;
+          for (let i in response.data.results.cartItems) {
+            cartTotal += response.data.results.cartItems[i].quantity;
+          }
+          setCartQuentity(cartTotal);
         } else {
           setCurrentUserCart([]);
+          setCartQuentity();
           setFormError(response.data.errors);
           console.log("error fetching current cart", formError);
         }
@@ -273,12 +327,16 @@ const Wrapper = ({ children }) => {
         search,
         featured,
         featuredFilter,
+        loginFormErrors,
+        regFormErrors,
+        cartQuentity,
         handleDelete,
         handleEdit,
         fetch,
         fetchOne,
         fetchAdd,
         getLoggedUser,
+        setLoggedUser,
         addToCart,
         getUserCart,
         removeOneCartItem,
@@ -290,6 +348,9 @@ const Wrapper = ({ children }) => {
         setSearch,
         getFeatured,
         setFeaturedFilter,
+        setLogin,
+        setReg,
+        setCartQuentity,
       }}>
       {children}
     </AppContext.Provider>

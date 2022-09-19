@@ -7,6 +7,7 @@
   background: whitesmoke;
   margin-top: 2rem;
   height: fit-content;
+  margin-bottom: 2rem;
 }
 
 .add-main {
@@ -14,6 +15,7 @@
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  height: fit-content;
   background: rgb(144, 182, 168);
   background: linear-gradient(
     0deg,

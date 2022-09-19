@@ -1,54 +1,66 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import { FaShoppingCart, FaUserAlt } from "react-icons/fa";
+import { FaShoppingCart, FaUserAlt, FaHome } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../Context";
 
 export default function Navbar() {
+  const {
+    getLoggedUser,
+    setLoggedUser,
+    loggedUser,
+    setCartQuentity,
+    cartQuentity,
+  } = useGlobalContext();
   const navigate = useNavigate();
+
   const logout = () => {
-    axios
-      .get("http://localhost:8000/api/users/logout", { withCredentials: true })
-      .then((res) => {
-        navigate("/login");
-      })
-      .catch((err) => {
-        console.log("Error of loging out", err);
-      });
+    if (loggedUser) {
+      axios
+        .get("http://localhost:8000/api/users/logout", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setLoggedUser(null);
+          setCartQuentity(null);
+          navigate("/login");
+        })
+        .catch((err) => {
+          console.log("Error of loging out", err);
+        });
+    }
   };
+
+  useEffect(() => {
+    getLoggedUser();
+  }, []);
+
   return (
     <div className="nav-main">
       <ul>
         <li>
-          <Link to="/">
-            <h4>Home</h4>
-          </Link>
+          <div>
+            <Link className="link" to="/">
+              <FaHome />
+            </Link>
+          </div>
         </li>
         <li>
-          <h4>About Us</h4>
+          <div>
+            <Link className="link" to="/cart">
+              <FaShoppingCart />
+            </Link>
+            <h4 className="cart-count">{cartQuentity}</h4>
+          </div>
         </li>
         <li>
-          <h4>Featured</h4>
-        </li>
-        <li>
-          <h4>Categories</h4>
+          <div onClick={() => logout()}>
+            <FaUserAlt />
+          </div>
         </li>
       </ul>
-
-      <div className="cart-login">
-        <Link to="/cart">
-          <FaShoppingCart />
-        </Link>
-        <div onClick={() => logout()}>
-          <FaUserAlt />
-        </div>
-        <Link to="/add">
-          <button className="btn btn-primary">
-            <h4>Add items (admin)</h4>
-          </button>
-        </Link>
-      </div>
     </div>
   );
 }

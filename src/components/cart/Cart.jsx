@@ -19,14 +19,10 @@ export default function Cart() {
   };
 
   useEffect(() => {
-    getLoggedUser();
-  }, []);
-
-  useEffect(() => {
     getUserCart(loggedUser._id);
   }, [loggedUser]);
 
-  if (loggedUser.firstName) {
+  if (loggedUser?.firstName) {
     return (
       <div className="card-main">
         <div className="cart-header">
@@ -71,12 +67,21 @@ export default function Cart() {
   } else {
     return (
       <div className="user-none d-flex justify-content-center p-5">
-        <div>
-          <h4>Please login or register to add or view items in the cart!</h4>
-          <Link to={"/login"}>
-            <button className="button m-5">Login / Register</button>
+        <div className="m-5">
+          <img
+            className="m-5"
+            src="https://cdn.pixabay.com/photo/2018/01/04/15/51/404-error-3060993__340.png"
+            alt="oops"
+          />
+          <h2>Please login or register to add or view items in the cart!</h2>
+          <Link to="/login">
+            <button className="button">
+              {" "}
+              <h4>Login / Register</h4>
+            </button>
           </Link>
         </div>
+        ;
       </div>
     );
   }

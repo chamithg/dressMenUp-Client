@@ -1,8 +1,9 @@
 import React from "react";
 import { useGlobalContext } from "../Context";
+import { Link } from "react-router-dom";
 import "./components.css";
 
-export default function Filter() {
+export default function Filter(loggedUser) {
   const {
     setPriceFilter,
     setTypeFilter,
@@ -149,6 +150,14 @@ export default function Filter() {
           remove all filters
         </button>
       </div>
+      <div className="line"></div>
+      {loggedUser._id === "632296e9e47a5881568339ab" ? (
+        <Link to="/add">
+          <button className="admin-button">
+            <h4>Add items (admin)</h4>
+          </button>
+        </Link>
+      ) : null}
     </div>
   );
 }

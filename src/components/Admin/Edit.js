@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useGlobalContext } from "../../Context";
 import "./admin.css";
 import axios from "axios";
 
-export default function Add() {
+export default function Edit() {
   let [name, setName] = useState("");
   let [type, setType] = useState("");
   let [desc, setDesc] = useState("");
@@ -17,7 +17,11 @@ export default function Add() {
   let [discount, setDiscount] = useState();
   let [formErrors, setFormErrors] = useState();
   const navigate = useNavigate();
-  const { loggedUser } = useGlobalContext();
+
+  const { getLoggedUser, loggedUser, fetchOne, item } = useGlobalContext();
+
+  const { id } = useParams();
+  console.log(id);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,13 +39,13 @@ export default function Add() {
     };
 
     axios
-      .post("http://localhost:8000/api/items/new", formInfo)
+      .put(`http://localhost:8000/api/items/${id}/update`, formInfo)
       .then((res) => {
-        console.log("res after add", res);
+        console.log("res after edit", res);
         if (res.data.errors) {
           setFormErrors(res.data.errors);
         } else {
-          navigate("/add");
+          navigate(`/products`);
         }
       })
       .catch((err) => {
@@ -49,17 +53,40 @@ export default function Add() {
       });
   };
 
+  const runStatusUpdate = () => {
+    setName(item?.name);
+    setType(item?.type);
+    setDesc(item?.desc);
+    setImg1(item?.img1);
+    setImg2(item?.img2);
+    setPrice(item?.price);
+    setOldPrice(item?.oldPrice);
+    setSize(item?.size);
+    setIsFeatured(item?.isFeatured);
+    setDiscount(item?.discount);
+  };
+
+  useEffect(() => {
+    getLoggedUser();
+    fetchOne(id);
+  }, []);
+
+  useEffect(() => {
+    runStatusUpdate();
+  }, [item]);
+
   return (
     <div className="add-main">
       {loggedUser._id === "632296e9e47a5881568339ab" ? (
         <div className="add-form">
-          <h3>Add new Item</h3>
+          <h2>Edit Item</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Name</label>
               <input
                 type="text"
-                name="firstnameName"
+                value={name}
+                name="name"
                 className="form-control"
                 onChange={(e) => setName(e.target.value)}
               />
@@ -69,6 +96,7 @@ export default function Add() {
               <label>type</label>
               <input
                 type="text"
+                value={type}
                 name="Type"
                 className="form-control"
                 onChange={(e) => setType(e.target.value)}
@@ -79,6 +107,7 @@ export default function Add() {
               <label>desc</label>
               <textarea
                 type="text"
+                value={desc}
                 name="desc"
                 className="form-control"
                 onChange={(e) => setDesc(e.target.value)}
@@ -89,6 +118,7 @@ export default function Add() {
               <label>img1</label>
               <input
                 type="text"
+                value={img1}
                 name="img1"
                 className="form-control"
                 onChange={(e) => setImg1(e.target.value)}
@@ -99,6 +129,7 @@ export default function Add() {
               <label>img2</label>
               <input
                 type="text"
+                value={img2}
                 name="img2"
                 className="form-control"
                 onChange={(e) => setImg2(e.target.value)}
@@ -111,6 +142,7 @@ export default function Add() {
                 class="form-control"
                 onChange={(e) => setSize(e.target.value)}
                 type="text"
+                value={size}
                 name="size"
                 id="exampleFormControlSelect1">
                 <option value="small">small</option>
@@ -124,6 +156,7 @@ export default function Add() {
               <label>is Featured</label>
               <select
                 class="form-control"
+                value={isFeatured}
                 onChange={(e) => setIsFeatured(e.target.value)}
                 id="exampleFormControlSelect1">
                 <option value="true">true</option>
@@ -136,6 +169,7 @@ export default function Add() {
               <input
                 type="number"
                 step=".01"
+                value={oldPrice}
                 name="oldPrice"
                 className="form-control"
                 onChange={(e) => setOldPrice(e.target.value)}
@@ -146,8 +180,9 @@ export default function Add() {
               <label>Price</label>
               <input
                 type="number"
-                name="price"
                 step=".01"
+                value={price}
+                name="price"
                 className="form-control"
                 onChange={(e) => setPrice(e.target.value)}
               />
@@ -157,6 +192,7 @@ export default function Add() {
               <label>Discount</label>
               <select
                 class="form-control"
+                value={discount}
                 onChange={(e) => setDiscount(e.target.value)}
                 id="exampleFormControlSelect1">
                 <option value="0">0</option>
@@ -166,7 +202,7 @@ export default function Add() {
               </select>
               <p className="text-danger"> {formErrors?.discount?.message}</p>
             </div>
-            <input type="submit" className="button m-3" value="Add" />
+            <input type="submit" className="button m-3" value="Edit" />
           </form>
         </div>
       ) : (
