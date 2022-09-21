@@ -10,6 +10,7 @@ li {
   color: inherit;
 }
 .nav-main {
+  z-index: 10;
   position: fixed;
   text-decoration: none;
   color: cadetblue;
@@ -19,18 +20,27 @@ li {
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  opacity: 10%;
+  opacity: 50%;
   transition: all 0.3s linear;
 }
 .cart-count {
+  transition: all 0.3s linear;
+  position: absolute;
+  top: 0.5rem;
+  right: 4rem;
+  font-size: 1.3rem;
   background: red;
-  color: blue;
-  padding: 6px 6px;
+  color: black;
+  padding: 4px 4px;
   height: fit-content;
-  min-width: 35px;
-  min-height: 35px;
+  min-width: 30px;
+  min-height: 30px;
   width: fit-content;
   border-radius: 50%;
+}
+
+.link {
+  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.8));
 }
 
 .nav-main:hover {
@@ -42,4 +52,7 @@ li:hover {
 }
 .link:hover {
   color: green;
+}
+li {
+  opacity: 100;
 }

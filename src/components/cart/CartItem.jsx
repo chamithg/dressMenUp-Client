@@ -41,8 +41,8 @@ export default function CartItem(item) {
 
   return (
     <div>
-      <div className="section-center">
-        <div className="cart-img-container d-flex justify-content-center">
+      <div className="cart-section-center">
+        <div className="cart-img-container">
           <img
             className="cart-Img"
             src={item.cartObj.img1}

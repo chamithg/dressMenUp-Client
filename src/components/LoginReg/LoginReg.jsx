@@ -7,16 +7,11 @@ import { useGlobalContext } from "../../Context";
 export default function LoginReg() {
   const [openLogin, setOpenLogin] = useState(true);
   const [openReg, setOpenReg] = useState(false);
-  const { setLoggedUser } = useGlobalContext();
 
   const reg = () => {
     setOpenLogin(!openLogin);
     setOpenReg(!openReg);
   };
-
-  useEffect(() => {
-    setLoggedUser({});
-  }, []);
   return (
     <div className="body-container d-flex justify-content-center">
       <div className="main">

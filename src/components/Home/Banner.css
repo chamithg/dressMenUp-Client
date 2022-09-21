@@ -47,7 +47,12 @@
   text-align: center;
   padding: 2rem;
   padding-top: 5rem;
-  background: var(--clr-back-1);
+  background: linear-gradient(
+    90deg,
+    rgb(142, 140, 91) 0%,
+    rgb(124, 141, 99) 18%,
+    rgb(142, 160, 149) 100%
+  );
   width: 100vw;
   height: fit-content;
 }

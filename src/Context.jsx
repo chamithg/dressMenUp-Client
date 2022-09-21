@@ -78,6 +78,16 @@ const Wrapper = ({ children }) => {
   ]);
   // ! get only featured
 
+  useEffect(() => {
+    getLoggedUser();
+  }, []);
+
+  useEffect(() => {
+    if (loggedUser) {
+      getUserCart(loggedUser._id);
+    }
+  }, [loggedUser]);
+
   const getFeatured = () => {
     axios
       .get("http://localhost:8000/api/items")

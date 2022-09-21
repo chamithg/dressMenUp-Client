@@ -7,8 +7,7 @@ import { useGlobalContext } from "../../Context";
 import CartItem from "./CartItem";
 
 export default function Cart() {
-  const { getLoggedUser, loggedUser, getUserCart, currentUserCart } =
-    useGlobalContext();
+  const { loggedUser, getUserCart, currentUserCart } = useGlobalContext();
 
   const getcartTotal = () => {
     let total = 0;

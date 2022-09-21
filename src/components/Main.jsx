@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Filter from "./Filter";
 import ItemList from "./itemList/ItemList";
+import { useGlobalContext } from "../Context";
 
 import "./general.css";
 import "./components.css";

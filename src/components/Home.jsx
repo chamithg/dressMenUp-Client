@@ -4,6 +4,8 @@ import Banner from "./Home/Banner";
 import Featured from "./Home/Featured";
 import axios from "axios";
 import { useGlobalContext } from "../Context";
+import Categories from "./Home/Categories";
+import NewsLetter from "./Home/NewsLetter";
 
 export default function Home() {
   const { getUserCart, loggedUser } = useGlobalContext();
@@ -18,6 +20,8 @@ export default function Home() {
         <Banner />
         <Featured />
         <About />
+        <Categories />
+        <NewsLetter />
       </div>
     </>
   );

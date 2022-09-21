@@ -109,6 +109,14 @@ p {
   margin-bottom: 1rem;
 }
 
+.discount {
+  position: relative;
+  top: -17rem;
+  right: -6rem;
+  height: 70px;
+  width: 70px;
+}
+
 @media (min-width: 992px) {
   article {
     display: grid;

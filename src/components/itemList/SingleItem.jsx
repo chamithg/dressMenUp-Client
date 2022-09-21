@@ -5,6 +5,7 @@ import {
   FaMinus,
   FaPlus,
 } from "react-icons/fa";
+import saleStamp from "../Assets/sale.png";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../Context";
 import RatingMain from "../rating/RatingMain";
@@ -57,7 +58,7 @@ export default function SingleItem() {
   };
 
   return (
-    <div className="item-main d-flex justify-content-center">
+    <div className="item-main d-flex justify-content-center align-items-center">
       <div className="item-container">
         <div className="image-container">
           <div>
@@ -73,6 +74,7 @@ export default function SingleItem() {
               alt=" productPicture"
             />
           </div>
+
           <div>
             <FaArrowAltCircleRight
               className="arrow-btn"
@@ -82,17 +84,23 @@ export default function SingleItem() {
         </div>
         <div className="product-detail-container">
           <h2 className="heading">{item.name}</h2>
-
           <h3>Type: {item.type}</h3>
-
+          {item.oldPrice ? (
+            <div>
+              <h4 className="old">${item.oldPrice}</h4>{" "}
+            </div>
+          ) : null}
           <h3>${item.price}</h3>
+          {item.oldPrice ? (
+            <div>
+              <p className="disc-per">({item.discount}% off)</p>{" "}
+            </div>
+          ) : null}
           <p>{item.desc}</p>
-
           <h3>
             Size: <span>{item.size}</span>
           </h3>
-          <br />
-          <div className="purchase-count-container ">
+          <div className="count-container ">
             <button className="btn">
               <FaMinus
                 onClick={() =>

@@ -13,6 +13,7 @@ export default function Navbar() {
     loggedUser,
     setCartQuentity,
     cartQuentity,
+    getUserCart,
   } = useGlobalContext();
   const navigate = useNavigate();
 
@@ -33,10 +34,6 @@ export default function Navbar() {
     }
   };
 
-  useEffect(() => {
-    getLoggedUser();
-  }, []);
-
   return (
     <div className="nav-main">
       <ul>
@@ -48,16 +45,18 @@ export default function Navbar() {
           </div>
         </li>
         <li>
-          <div>
+          <div className={cartQuentity > 0 ? "visible" : null}>
             <Link className="link" to="/cart">
               <FaShoppingCart />
             </Link>
-            <h4 className="cart-count">{cartQuentity}</h4>
+            {cartQuentity > 0 ? (
+              <h4 className="cart-count">{cartQuentity}</h4>
+            ) : null}
           </div>
         </li>
         <li>
           <div onClick={() => logout()}>
-            <FaUserAlt />
+            <FaUserAlt className="link" />
           </div>
         </li>
       </ul>

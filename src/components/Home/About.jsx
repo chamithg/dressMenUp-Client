@@ -1,24 +1,19 @@
 import React from "react";
 
 import "./about.css";
-import about1 from "../Assets/about1.jpeg";
-import about2 from "../Assets/about2.jpeg";
-import about3 from "../Assets/about3.jpeg";
-import about4 from "../Assets/about4.jpeg";
+import about2 from "../Assets/about2.jpg";
 
 export default function About() {
   return (
     <div className="about-main">
-      <div className="about-left">
-        <img className="abt-image3" src={about3} alt="baner" />
-        <div>
-          <img className="abt-image1" src={about1} alt="baner" />
-          <img className="abt-image2" src={about2} alt="baner" />
-        </div>
-        <img className="abt-image4" src={about4} alt="baner" />
-      </div>
-      <div className="about-right">
-        <div className="logo">
+      <img
+        className="abt-card abt-image1"
+        src="https://images02.nicepage.com/c461c07a441a5d220e8feb1a/b744041a21595f0fb465b42b/handsome-male-entrepreneur-smiling-cheerful_176420-17877.jpg"
+        alt="baner"
+      />
+
+      <div className="abt-card about-info">
+        <div className="abt-logo">
           <h2>First Class Gent's Clothing store</h2>
         </div>
         <p className="abt-text">
@@ -30,6 +25,7 @@ export default function About() {
           sit.
         </p>
       </div>
+      <img className="abt-card abt-image2" src={about2} alt="baner" />
     </div>
   );
 }
