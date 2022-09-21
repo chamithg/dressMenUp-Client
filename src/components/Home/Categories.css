@@ -1,0 +1,142 @@
+.cat-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cat-left {
+  height: fit-content;
+}
+.cat-right {
+  height: fit-content;
+}
+
+.cat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  height: 17rem;
+  width: 80vw;
+  background-position: center;
+  transition: all 0.3s linear;
+}
+
+.cat1 {
+  background: linear-gradient(rgba(202, 246, 158, 0.4), rgba(76, 83, 48, 0.8)),
+    url("https://wallpapercave.com/wp/wp9590352.jpg");
+  background-size: cover;
+  overflow: hidden;
+}
+.cat2 {
+  background: linear-gradient(rgba(202, 246, 158, 0.4), rgba(76, 83, 48, 0.8)),
+    url("https://fcity.in/images/products/13407808/f8cfc_512.jpg");
+  background-size: cover;
+  overflow: hidden;
+}
+.cat3 {
+  background: linear-gradient(rgba(202, 246, 158, 0.4), rgba(76, 83, 48, 0.8)),
+    url("https://cdn.shopify.com/s/files/1/0302/8520/1452/products/Cognac_Tweed_1024x1024_60b045c7-f4b4-4132-9ace-86a72e938b85.jpg?v=1606316635");
+  background-size: cover;
+  overflow: hidden;
+}
+.cat4 {
+  background: linear-gradient(rgba(202, 246, 158, 0.4), rgba(76, 83, 48, 0.8)),
+    url("https://qph.cf2.quoracdn.net/main-qimg-7073af3da5b5ce86e13ed130eb6b6de7-lq");
+  background-size: cover;
+  overflow: hidden;
+}
+/* hover */
+
+.cat1:hover {
+  background: linear-gradient(rgba(202, 246, 158, 0.7), rgba(76, 83, 48, 0.8)),
+    url("https://wallpapercave.com/wp/wp9590352.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.cat2:hover {
+  background: linear-gradient(rgba(202, 246, 158, 0.7), rgba(76, 83, 48, 0.8)),
+    url("https://fcity.in/images/products/13407808/f8cfc_512.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.cat3:hover {
+  background: linear-gradient(rgba(202, 246, 158, 0.7), rgba(76, 83, 48, 0.8)),
+    url("https://cdn.shopify.com/s/files/1/0302/8520/1452/products/Cognac_Tweed_1024x1024_60b045c7-f4b4-4132-9ace-86a72e938b85.jpg?v=1606316635");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.cat4:hover {
+  background: linear-gradient(rgba(202, 246, 158, 0.7), rgba(76, 83, 48, 0.8)),
+    url("https://qph.cf2.quoracdn.net/main-qimg-7073af3da5b5ce86e13ed130eb6b6de7-lq");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+/* hover-end */
+.cat-head {
+  position: relative;
+}
+
+.cat h1 {
+  color: aliceblue;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cat-img {
+  height: 20rem;
+  width: 80vw;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.cat-left {
+  display: none;
+  min-height: 40rem;
+  height: fit-content;
+  padding-top: 15rem;
+  color: var(--clr-font-2);
+  background: rgb(228, 227, 135);
+  background: linear-gradient(
+    90deg,
+    rgba(228, 227, 135, 1) 0%,
+    rgb(183, 199, 159) 18%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+.cat:hover {
+  scale: 1.05;
+}
+
+.cat h1:hover {
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (min-width: 768px) {
+  .cat-main {
+    flex-direction: row;
+  }
+  .cat {
+    width: 25vw;
+  }
+  .cat-head {
+    position: relative;
+  }
+
+  .cat-left {
+    display: block;
+    width: 40vw;
+  }
+  .cat-right {
+    width: 60vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}
