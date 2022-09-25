@@ -1,4 +1,7 @@
+#### IMPORTANT ###
 This is the Client side of the "Dress Men Up " full stack MERN app. this whole folder should be inside of the DressMenUp-server  root folder.
+
+Link to Server ---> https://github.com/chamithg/DressMenUp-server.git
 
 # Getting Started with Create React App
 
